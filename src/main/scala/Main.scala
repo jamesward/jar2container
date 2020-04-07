@@ -59,7 +59,7 @@ object Main extends App {
         val imageReference = ImageReference.parse(config.image)
 
         // todo: logger
-        val factory = CredentialRetrieverFactory.forImage(imageReference, println)
+        val factory = CredentialRetrieverFactory.forImage(imageReference, _ => ())
 
         val registryImage = RegistryImage.named(config.image)
 
@@ -68,10 +68,11 @@ object Main extends App {
         registryImage.addCredentialRetriever(factory.googleApplicationDefaultCredentials())
 
         // todo: logger
-        Containerizer.to(registryImage).setToolName("jar2container").addEventHandler(println)
+        Containerizer.to(registryImage).setToolName("jar2container").addEventHandler(_ => ())
       }
       else {
-        Containerizer.to(DockerDaemonImage.named(config.image))
+        // todo: logger
+        Containerizer.to(DockerDaemonImage.named(config.image)).addEventHandler(_ => ())
       }
 
       Jib.from(config.baseImage)

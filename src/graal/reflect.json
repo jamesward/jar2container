@@ -23,6 +23,12 @@
     "allDeclaredConstructors":true
   },
   {
+    "name":"com.google.cloud.tools.jib.docker.json.DockerManifestEntryTemplate",
+    "allDeclaredFields":true,
+    "allDeclaredMethods":true,
+    "allDeclaredConstructors":true
+  },
+  {
     "name":"com.google.cloud.tools.jib.image.json.BuildableManifestTemplate",
     "allDeclaredMethods":true
   },
