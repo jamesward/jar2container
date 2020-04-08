@@ -16,16 +16,10 @@
 
 import java.io.File
 
-import com.google.cloud.tools.jib.frontend.CredentialRetrieverFactory
-import java.nio.file.Files
-import java.nio.file.Path
-import java.nio.file.Paths
-
 import com.google.cloud.tools.jib.api.{AbsoluteUnixPath, Containerizer, DockerDaemonImage, ImageReference, Jib, JibContainer, RegistryImage}
-import com.google.cloud.tools.jib.json.JsonTemplateMapper
-import com.google.cloud.tools.jib.registry.credentials.DockerCredentialHelper
-import zio.{App, ZEnv, ZIO}
+import com.google.cloud.tools.jib.frontend.CredentialRetrieverFactory
 import zio.console._
+import zio.{App, ZEnv, ZIO}
 import io.github.vigoo.clipp._
 import io.github.vigoo.clipp.parsers._
 import io.github.vigoo.clipp.syntax._
@@ -93,7 +87,6 @@ object Main extends App {
 
   def run(args: List[String]): ZIO[ZEnv, Nothing, Int] = {
     program(args).foldM({ throwable =>
-      throwable.printStackTrace()
       for {
         _ <- putStrLn(throwable.getMessage)
         exit <- ZIO.succeed(1)
